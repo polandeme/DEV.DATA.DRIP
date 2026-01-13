@@ -5,47 +5,47 @@ import styles from './fashion.module.css';
 
 const fashionData = [
     {
-        id: 'minimalist',
-        title: '全栈极简风',
-        subtitle: '棉质构建的高效',
-        image: '/images/fashion/minimalist.png',
+        id: 'professional-female',
+        title: '高冷御姐风',
+        subtitle: '气场全开的架构师',
+        image: '/images/fashion/cyberpunk-female.png',
         specs: {
-            comfort: '9/10',
-            time: '30秒出门',
-            vibe: '低调沉稳'
+            comfort: '8/10',
+            aura: '女王气场',
+            vibe: '生人勿近'
         },
-        description: "专为追求效率的开发者设计。这套黑色高领套装在无声中表达着'少即是多'的审美哲学。",
-        items: ['纯色黑T恤', '原色牛仔裤', '小白鞋'],
+        description: "并不是只有代码冰冷。一身剪裁得体的黑色高科技面料，勾勒出干练的身材曲线，眼神中透着对技术栈的绝对掌控。",
+        items: ['修身机能外套', '紧身战术裤', '智能眼镜'],
         stack: [
-            { name: '优衣库 U系列 T恤', price: '¥99' },
-            { name: 'A.P.C. 牛仔裤', price: '¥1,200' },
-            { name: 'Common Projects 休闲鞋', price: '¥2,800' }
+            { name: 'Arc\'teryx Veilance 女款', price: '¥4,500' },
+            { name: 'Lululemon Lab 裤装', price: '¥1,200' },
+            { name: 'Gentle Monster 智能镜', price: '¥2,800' }
         ],
         compatibility: {
-            best: '技术分享会, 咖啡厅办公',
-            avoid: '正式商务晚宴'
+            best: '技术大会演讲, 董事会',
+            avoid: '需要卖萌的场合'
         }
     },
     {
-        id: 'cyberpunk',
-        title: '机能未来风',
-        subtitle: '雨夜与霓虹',
-        image: '/images/fashion/cyberpunk.png',
+        id: 'yoga-hot',
+        title: '热辣瑜伽风',
+        subtitle: '代码与身材我全都要',
+        image: '/images/fashion/minimalist-female.png',
         specs: {
-            comfort: '7/10',
-            utility: '超强收纳',
-            weather: '全天候防雨'
+            comfort: '10/10',
+            hot: 'MAX',
+            fit: 'S-Curve'
         },
-        description: "随时准备应对各种天气。配备多个功能口袋，可装载移动硬盘、能量饮料和随身设备。",
-        items: ['硬壳冲锋衣', '束脚工装裤', '防水球鞋'],
+        description: "工作是为了更好的生活。高弹力瑜伽服不仅舒适透气，更是在不经意间展露完美的腰臀比。谁说程序员不懂性感？",
+        items: ['高强度运动内衣', '蜜桃臀瑜伽裤', '修身罩衫'],
         stack: [
-            { name: 'ACRONYM 外套', price: '¥12,000' },
-            { name: 'Nike ISPA 长裤', price: '¥1,499' },
-            { name: '机能风运动鞋', price: '¥3,500' }
+            { name: 'Lululemon Align 系列', price: '¥850' },
+            { name: 'Alo Yoga 运动文胸', price: '¥600' },
+            { name: 'Nike 训练鞋', price: '¥799' }
         ],
         compatibility: {
-            best: '音乐节, 下雨的通勤路',
-            avoid: '传统HR面试'
+            best: '健身房, 居家结对编程',
+            avoid: '正式商务谈判'
         }
     },
     {
@@ -271,112 +271,6 @@ const peripherals = [
     { rank: '04', name: '双肩背包', desc: 'Aer / Peak Design。收纳井井有条。' }
 ];
 
-function SeasonalGuide() {
-    const [activeSeason, setActiveSeason] = useState('spring');
-
-    return (
-        <section className={styles.seasonalSection}>
-            <h2 className={styles.sectionTitle}>四季穿搭指南</h2>
-
-            <div className={styles.seasonTabs}>
-                {['spring', 'summer', 'autumn', 'winter'].map((season) => (
-                    <button
-                        key={season}
-                        className={`${styles.seasonTab} ${activeSeason === season ? styles.active : ''}`}
-                        onClick={() => setActiveSeason(season)}
-                    >
-                        {seasonalData[season].title}
-                    </button>
-                ))}
-            </div>
-
-            <div className={styles.seasonContent}>
-                <div className={styles.seasonImageWrapper}>
-                    <Image
-                        src={seasonalData[activeSeason].image}
-                        alt={seasonalData[activeSeason].title}
-                        fill
-                        className={styles.modalImage}
-                        sizes="(max-width: 900px) 100vw, 50vw"
-                    />
-                </div>
-
-                <div className={styles.seasonInfo}>
-                    <span className={styles.seasonQuote}>{seasonalData[activeSeason].quote}</span>
-                    <h3>{seasonalData[activeSeason].title}</h3>
-                    <p className={styles.description} style={{ fontSize: '1.2rem' }}>{seasonalData[activeSeason].description}</p>
-
-                    <div className={styles.weatherProtocol}>
-                        <span className={styles.weatherTitle}>天气与场景贴士</span>
-                        <div className={styles.weatherList}>
-                            {seasonalData[activeSeason].weather.map((item, index) => (
-                                <div key={index} className={styles.weatherItem}>
-                                    <span className={styles.weatherCondition}>{item.condition}</span>
-                                    <span className={styles.weatherAction}>{item.action}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function FashionLinter() {
-    const [logs, setLogs] = useState([]);
-    const [isRunning, setIsRunning] = useState(false);
-
-    const runLinter = () => {
-        setIsRunning(true);
-        setLogs([]);
-        let count = 0;
-        const interval = setInterval(() => {
-            if (count >= 5) {
-                clearInterval(interval);
-                setIsRunning(false);
-                setLogs(prev => [...prev, { type: 'success', msg: '自检完成！今天也是帅气的一天。' }]);
-                return;
-            }
-
-            // Randomly pick errors/warnings
-            const randomItem = fashionLinterData[Math.floor(Math.random() * fashionLinterData.length)];
-            setLogs(prev => [...prev, randomItem]);
-            count++;
-        }, 600);
-    };
-
-    return (
-        <div className={styles.linterContainer}>
-            <div className={styles.linterHeader}>
-                <span className={`${styles.dot} ${styles.red}`}></span>
-                <span className={`${styles.dot} ${styles.yellow}`}></span>
-                <span className={`${styles.dot} ${styles.green}`}></span>
-                <span style={{ color: '#555', marginLeft: 'auto', fontSize: '0.8rem' }}>Style Check</span>
-            </div>
-            <div className={styles.terminalOutput}>
-                <div className={styles.logLine}>
-                    <span className={styles.prompt}>➜</span>
-                    <span className={styles.cmd}>正在运行风格自检...</span>
-                </div>
-                {logs.map((log, i) => (
-                    <div key={i} style={{ marginTop: '8px' }}>
-                        {log.type === 'error' && <span className={styles['log-error']}>[注意] </span>}
-                        {log.type === 'warn' && <span className={styles['log-warn']}>[提示] </span>}
-                        {log.type === 'success' && <span className={styles['log-success']}>[完成] </span>}
-                        <span>{log.msg}</span>
-                        {log.fix && <div style={{ color: '#565f89', paddingLeft: '20px', fontSize: '0.85rem' }}>↳ {log.fix}</div>}
-                    </div>
-                ))}
-                {isRunning && <span className={styles.cursor}>_</span>}
-            </div>
-            <button className={styles.linterBtn} onClick={runLinter} disabled={isRunning}>
-                {isRunning ? '自检中...' : '点击运行风格自检'}
-            </button>
-        </div>
-    );
-}
-
 const specialData = [
     {
         id: 'maid',
@@ -519,9 +413,115 @@ function ExpansionModules() {
     );
 }
 
+function SeasonalGuide() {
+    const [activeSeason, setActiveSeason] = useState('spring');
+
+    return (
+        <section className={styles.seasonalSection}>
+            <h2 className={styles.sectionTitle}>四季穿搭指南</h2>
+
+            <div className={styles.seasonTabs}>
+                {['spring', 'summer', 'autumn', 'winter'].map((season) => (
+                    <button
+                        key={season}
+                        className={`${styles.seasonTab} ${activeSeason === season ? styles.active : ''}`}
+                        onClick={() => setActiveSeason(season)}
+                    >
+                        {seasonalData[season].title}
+                    </button>
+                ))}
+            </div>
+
+            <div className={styles.seasonContent}>
+                <div className={styles.seasonImageWrapper}>
+                    <Image
+                        src={seasonalData[activeSeason].image}
+                        alt={seasonalData[activeSeason].title}
+                        fill
+                        className={styles.modalImage}
+                        sizes="(max-width: 900px) 100vw, 50vw"
+                    />
+                </div>
+
+                <div className={styles.seasonInfo}>
+                    <span className={styles.seasonQuote}>{seasonalData[activeSeason].quote}</span>
+                    <h3>{seasonalData[activeSeason].title}</h3>
+                    <p className={styles.description} style={{ fontSize: '1.2rem' }}>{seasonalData[activeSeason].description}</p>
+
+                    <div className={styles.weatherProtocol}>
+                        <span className={styles.weatherTitle}>天气与场景贴士</span>
+                        <div className={styles.weatherList}>
+                            {seasonalData[activeSeason].weather.map((item, index) => (
+                                <div key={index} className={styles.weatherItem}>
+                                    <span className={styles.weatherCondition}>{item.condition}</span>
+                                    <span className={styles.weatherAction}>{item.action}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function FashionLinter() {
+    const [logs, setLogs] = useState([]);
+    const [isRunning, setIsRunning] = useState(false);
+
+    const runLinter = () => {
+        setIsRunning(true);
+        setLogs([]);
+        let count = 0;
+        const interval = setInterval(() => {
+            if (count >= 5) {
+                clearInterval(interval);
+                setIsRunning(false);
+                setLogs(prev => [...prev, { type: 'success', msg: '自检完成！今天也是帅气的一天。' }]);
+                return;
+            }
+
+            // Randomly pick errors/warnings
+            const randomItem = fashionLinterData[Math.floor(Math.random() * fashionLinterData.length)];
+            setLogs(prev => [...prev, randomItem]);
+            count++;
+        }, 600);
+    };
+
+    return (
+        <div className={styles.linterContainer}>
+            <div className={styles.linterHeader}>
+                <span className={`${styles.dot} ${styles.red}`}></span>
+                <span className={`${styles.dot} ${styles.yellow}`}></span>
+                <span className={`${styles.dot} ${styles.green}`}></span>
+                <span style={{ color: '#555', marginLeft: 'auto', fontSize: '0.8rem' }}>Style Check</span>
+            </div>
+            <div className={styles.terminalOutput}>
+                <div className={styles.logLine}>
+                    <span className={styles.prompt}>➜</span>
+                    <span className={styles.cmd}>正在运行风格自检...</span>
+                </div>
+                {logs.map((log, i) => (
+                    <div key={i} style={{ marginTop: '8px' }}>
+                        {log.type === 'error' && <span className={styles['log-error']}>[注意] </span>}
+                        {log.type === 'warn' && <span className={styles['log-warn']}>[提示] </span>}
+                        {log.type === 'success' && <span className={styles['log-success']}>[完成] </span>}
+                        <span>{log.msg}</span>
+                        {log.fix && <div style={{ color: '#565f89', paddingLeft: '20px', fontSize: '0.85rem' }}>↳ {log.fix}</div>}
+                    </div>
+                ))}
+                {isRunning && <span className={styles.cursor}>_</span>}
+            </div>
+            <button className={styles.linterBtn} onClick={runLinter} disabled={isRunning}>
+                {isRunning ? '自检中...' : '点击运行风格自检'}
+            </button>
+        </div>
+    );
+}
+
 export default function ProgrammerFashion() {
     const [selectedItem, setSelectedItem] = useState(null);
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
         setTheme(prev => prev === 'dark' ? 'light' : 'dark');

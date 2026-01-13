@@ -377,12 +377,103 @@ function FashionLinter() {
     );
 }
 
+const specialData = [
+    {
+        id: 'maid',
+        title: '绝对领域 · 调试套',
+        subtitle: '据说能减少99%的Bug',
+        image: '/images/fashion/special-maid.png',
+        specs: {
+            power: '+200%',
+            dignity: '-50%',
+            bugFree: '100%'
+        },
+        description: "传说中只有最顶级的全栈开发者才能驾驭的终极装备。一旦穿上，思路泉涌，Coding如神助。",
+        items: ['粉色猫耳耳机', '编程专用条纹袜', '机械键盘(红轴)'],
+        badge: 'Legendary'
+    },
+    {
+        id: 'senior',
+        title: '扫地僧 · 架构师',
+        subtitle: '技术与发量成反比',
+        image: '/images/fashion/special-senior.png',
+        specs: {
+            exp: 'MAX',
+            hair: '404',
+            care: '0'
+        },
+        description: "强者不需要发型，只需要发际线。那件穿了10年的褪色格子衫，是通往高阶职级的法袍。",
+        items: ['褪色格子衫', '特大号沙滩裤', '酒店拖鞋'],
+        badge: 'Mythic'
+    },
+    {
+        id: 'cosplay',
+        title: '赛博浪人 · 特别款',
+        subtitle: '醒醒，武士',
+        image: '/images/fashion/special-cosplay.png',
+        specs: {
+            cool: '200%',
+            future: '2077',
+            reality: 'Glitch'
+        },
+        description: "当代码不仅是工作，而是幻想。随时准备烧毁这座城市（的显卡）。",
+        items: ['LED领口夹克', '武士刀雨伞', '战术面具'],
+        badge: 'Limited'
+    }
+];
+
+function SpecialSection() {
+    return (
+        <section className={styles.specialSection}>
+            <h2 className={styles.sectionTitle} style={{ background: 'linear-gradient(90deg, #ff00cc, #3333ff)', backgroundClip: 'text', WebkitBackgroundClip: 'text' }}>特别企划 / 隐藏款</h2>
+            <div className={styles.specialGrid}>
+                {specialData.map((item) => (
+                    <div key={item.id} className={styles.specialCard}>
+                        <div className={styles.specialBadge}>{item.badge}</div>
+                        <div className={styles.imageWrapper}>
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className={styles.image}
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                            />
+                        </div>
+                        <div className={styles.content}>
+                            <span className={styles.cardSubtitle}>{item.subtitle}</span>
+                            <div className={styles.cardHeader}>
+                                <h2 className={styles.cardTitle}>{item.title}</h2>
+                            </div>
+                            <div className={styles.specs}>
+                                {Object.entries(item.specs).map(([key, value]) => (
+                                    <div key={key} className={styles.specRow}>
+                                        <span className={styles.specLabel}>{key.toUpperCase()}:</span>
+                                        <span className={styles.specValue}>{value}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <p className={styles.description}>{item.description}</p>
+                            <div className={styles.tags}>
+                                {item.items.map((tag) => (
+                                    <span key={tag} className={styles.tag}>{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 function ExpansionModules() {
     return (
         <section className={styles.expansionSection}>
             <h2 className={styles.sectionTitle}>更多推荐</h2>
 
             <FashionLinter />
+
+            <SpecialSection />
 
             <div className={styles.dualCol}>
                 {/* Debugger */}
